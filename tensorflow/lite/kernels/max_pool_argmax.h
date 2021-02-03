@@ -12,17 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef MEDIAPIPE_UTIL_TFLITE_OPERATIONS_MAX_POOL_ARGMAX_H_
-#define MEDIAPIPE_UTIL_TFLITE_OPERATIONS_MAX_POOL_ARGMAX_H_
+#ifndef TENSORFLOW_LITE_KERNELS_MAX_POOL_ARGMAX_H_
+#define TENSORFLOW_LITE_KERNELS_MAX_POOL_ARGMAX_H_
 
 #include "tensorflow/lite/kernels/kernel_util.h"
 
-namespace mediapipe {
-namespace tflite_operations {
+namespace tflite {
+namespace ops {
+namespace custom {
 
 TfLiteRegistration* RegisterMaxPoolingWithArgmax2D();
 
-}  // namespace tflite_operations
-}  // namespace mediapipe
+}  // namespace custom
+}  // namespace ops
+}  // namespace tflite
 
-#endif  // MEDIAPIPE_UTIL_TFLITE_OPERATIONS_MAX_POOL_ARGMAX_H_
+#endif  // TENSORFLOW_LITE_KERNELS_MAX_POOL_ARGMAX_H_

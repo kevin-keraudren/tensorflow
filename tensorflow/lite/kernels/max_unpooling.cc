@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "mediapipe/util/tflite/operations/max_unpooling.h"
+#include "tensorflow/lite/kernels/max_unpooling.h"
 
 #include "tensorflow/lite/kernels/internal/common.h"
 #include "tensorflow/lite/kernels/internal/tensor.h"
 #include "tensorflow/lite/kernels/padding.h"
 
-namespace mediapipe {
-namespace tflite_operations {
-namespace {
+namespace tflite {
+namespace ops {
+namespace custom {
+namespace MaxUnpooling2D {
 
 constexpr int kDataInputTensor = 0;
 constexpr int kIndicesTensor = 1;
@@ -138,7 +139,7 @@ TfLiteStatus Eval(TfLiteContext* context, TfLiteNode* node) {
   return kTfLiteOk;
 }
 
-}  // namespace
+} // namespace MaxUnpooling2D
 
 TfLiteRegistration* RegisterMaxUnpooling2D() {
   static TfLiteRegistration reg = {
@@ -148,9 +149,10 @@ TfLiteRegistration* RegisterMaxUnpooling2D() {
       [](TfLiteContext*, void* buffer) -> void {
         delete reinterpret_cast<TfLitePaddingValues*>(buffer);
       },
-      Prepare, Eval};
+      MaxUnpooling2D::Prepare, MaxUnpooling2D::Eval};
   return &reg;
 }
 
-}  // namespace tflite_operations
-}  // namespace mediapipe
+}  // namespace custom
+}  // namespace ops
+}  // namespace tflite

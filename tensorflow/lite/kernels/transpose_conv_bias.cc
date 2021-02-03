@@ -16,14 +16,15 @@
 // This version has been modified by MediaPipe authors to support bias. Details
 // of the modification is marked below in the code.
 
-#include "mediapipe/util/tflite/operations/transpose_conv_bias.h"
+#include "tensorflow/lite/kernels/transpose_conv_bias.h"
 
 #include "tensorflow/lite/kernels/internal/tensor.h"
 #include "tensorflow/lite/kernels/padding.h"
 
-namespace mediapipe {
-namespace tflite_operations {
-namespace {
+namespace tflite {
+namespace ops {
+namespace custom {
+namespace Convolution2DTransposeBias {
 
 constexpr int kWeightsTensor = 1;
 constexpr int kBiasTensor = 2;
@@ -256,12 +257,13 @@ TfLiteStatus Eval(TfLiteContext* context, TfLiteNode* node) {
 }
 // End of copy.
 
-}  // namespace
+} // namespace Convolution2DTransposeBias
 
 TfLiteRegistration* RegisterConvolution2DTransposeBias() {
-  static TfLiteRegistration reg = {nullptr, nullptr, Prepare, Eval};
+  static TfLiteRegistration reg = {nullptr, nullptr, Convolution2DTransposeBias::Prepare, Convolution2DTransposeBias::Eval};
   return &reg;
 }
 
-}  // namespace tflite_operations
-}  // namespace mediapipe
+}  // namespace custom
+}  // namespace ops
+}  // namespace tflite

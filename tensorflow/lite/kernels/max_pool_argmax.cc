@@ -15,15 +15,16 @@
 //
 // This version has been modified by MediaPipe authors to support argmax
 // indices. Details of the modification is marked below in the code.
-#include "mediapipe/util/tflite/operations/max_pool_argmax.h"
+#include "tensorflow/lite/kernels/max_pool_argmax.h"
 
 #include "tensorflow/lite/kernels/internal/common.h"
 #include "tensorflow/lite/kernels/internal/tensor.h"
 #include "tensorflow/lite/kernels/padding.h"
 
-namespace mediapipe {
-namespace tflite_operations {
-namespace {
+namespace tflite {
+namespace ops {
+namespace custom {
+namespace MaxPoolingWithArgmax2D {
 
 constexpr int kDataInputTensor = 0;
 constexpr int kOutputTensor = 0;
@@ -200,7 +201,7 @@ TfLiteStatus Eval(TfLiteContext* context, TfLiteNode* node) {
 // End of MediaPipe modification.
 // End of copy.
 
-}  // namespace
+} // namespace MaxPoolingWithArgmax2D
 
 TfLiteRegistration* RegisterMaxPoolingWithArgmax2D() {
   static TfLiteRegistration reg = {
@@ -210,9 +211,10 @@ TfLiteRegistration* RegisterMaxPoolingWithArgmax2D() {
       [](TfLiteContext*, void* buffer) -> void {
         delete reinterpret_cast<TfLitePaddingValues*>(buffer);
       },
-      Prepare, Eval};
+      MaxPoolingWithArgmax2D::Prepare, MaxPoolingWithArgmax2D::Eval};
   return &reg;
 }
 
-}  // namespace tflite_operations
-}  // namespace mediapipe
+}  // namespace custom
+}  // namespace ops
+}  // namespace tflite
