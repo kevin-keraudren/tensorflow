@@ -56,8 +56,8 @@ apt-get install -y --no-install-recommends \
     python-dev \
     python-setuptools \
     python-virtualenv \
-    python3-dev \
-    python3-setuptools \
+	python3.7 \
+    libpython3.7-dev \
     rsync \
     sudo \
     swig \
